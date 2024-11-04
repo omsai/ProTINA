@@ -69,7 +69,7 @@ protina <- function(lfc,slope=NULL,pgn,grplist,kfold=10,par=FALSE,numCores=4){
       }
     
       cvfit <- cv.glmnet(Xin, y, alpha = 0, intercept = FALSE, nfolds = kfold)
-      coef.cvfit <- coef.cv.glmnet(cvfit,s='lambda.min')
+      coef.cvfit <- coef(cvfit,s='lambda.min')
       Aj <- vector(mode =  "integer",length = dim(Xin)[2])
       Aj[coef.cvfit@i] <- coef.cvfit@x
 
@@ -101,7 +101,7 @@ protina <- function(lfc,slope=NULL,pgn,grplist,kfold=10,par=FALSE,numCores=4){
       }
       
       cvfit <- cv.glmnet(Xin, y, family='gaussian',alpha = 0, intercept = FALSE, nfolds = kfold)
-      coef.cvfit <- coef.cv.glmnet(cvfit,s='lambda.min')
+      coef.cvfit <- coef(cvfit,s='lambda.min')
       Aj <- vector(mode =  "integer",length = dim(Xin)[2])
       Aj[coef.cvfit@i] <- coef.cvfit@x
       A[j,ppar] <- Aj[1:(length(Aj)-m)]
